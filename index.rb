@@ -1,11 +1,11 @@
-puts "Bienvenido al menú principal!"
-puts "--------------------------------"
-
-puts "1. Oír un libro (speaker.rb)"
-puts "2. Convertir PDF a TXT (pdf-reader.rb)"
-puts "3. Salir"
-
 loop do
+  puts "Bienvenido al menú principal!"
+  puts "--------------------------------"
+
+  puts "1. Oír un libro (speaker.rb)"
+  puts "2. Convertir PDF a TXT (pdf-reader.rb)"
+  puts "3. Salir"
+
   print "Ingrese su opción: "
   opcion = gets.chomp
 
