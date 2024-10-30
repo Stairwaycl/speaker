@@ -12,23 +12,29 @@ seleccion = gets.chomp
 
 case seleccion
 when "1"
-  ruta_libro = "books/arush/paz-hombres/c9"
-  files = Dir.children(ruta_libro).select { |f| f.end_with?('.txt') }.sort
-  files.each do |file|
-    file_path = File.join(ruta_libro, file)
-    text = File.read(file_path)
-    speech = ESpeak::Speech.new(text,
-      voice: "es",
-      speed: 175,
-      pitch: 50,
-      capital: 25,
-      amplitude: 110
-    )
-    speech.speak
-    puts "Presione 'c' para continuar o 's' para salir"
-    input = gets.chomp
-    if input.downcase == 's'
-      break
+  ruta_base = "books/arush/paz-hombres"
+  dirs = Dir.children(ruta_base).select { |d| d.start_with?('c') }.sort
+
+  dirs.each do |dir|
+    ruta_libro = File.join(ruta_base, dir)
+    files = Dir.children(ruta_libro).select { |f| f.end_with?('.txt') }.sort
+
+    files.each do |file|
+      file_path = File.join(ruta_libro, file)
+      text = File.read(file_path)
+      speech = ESpeak::Speech.new(text,
+        voice: "es",
+        speed: 175,
+        pitch: 50,
+        capital: 25,
+        amplitude: 110
+      )
+      speech.speak
+      # puts "Presione 'c' para continuar o 's' para salir"
+      # input = gets.chomp
+      # if input.downcase == 's'
+      #  break
+      # end
     end
   end
 
