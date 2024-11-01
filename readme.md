@@ -32,3 +32,5 @@ Mejoras:
 que calcule el tiempo que dura cada libro leidoc on el speaker, y que se pueda calcular cuanto se demoraria en leer el libro si uno lee tanto tiempo por día.
 
 además, agregar un listado de preceptos que se encuentren en el libroen el jardin de la paz.
+
+Está funcionando bien en el jardín de la paz, pero los demás libros no he revisado, ya que su estructura con los dir es diferente.
