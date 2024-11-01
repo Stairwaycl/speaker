@@ -10,11 +10,9 @@ puts "3. Kitzur Shuljan Aruj - Rabino Shlomo Ganzfried"
 print "Ingrese el número de su selección: "
 seleccion = gets.chomp
 
-case seleccion
-when "1"
-  ruta_base = "books/arush/paz-hombres"
-  dirs = Dir.children(ruta_base).select { |d| d.start_with?('c') }.sort
+def reproducir_texto(ruta_base, voice)
   salir = false
+  dirs = Dir.children(ruta_base).select { |d| d.start_with?('c') }.sort
 
   dirs.each do |dir|
     break if salir
@@ -26,7 +24,7 @@ when "1"
       file_path = File.join(ruta_libro, file)
       text = File.read(file_path)
       speech = ESpeak::Speech.new(text,
-        voice: "es",
+        voice: voice,
         speed: 175,
         pitch: 50,
         capital: 25,
@@ -49,79 +47,20 @@ when "1"
     end
   end
   exit if salir
+end
+
+case seleccion
+when "1"
+  ruta_base = "books/arush/paz-hombres"
+  reproducir_texto(ruta_base, "es")
 
 when "2"
-  ruta_base = "books/moshe-rabenu/bereshit/c1"
-  files = Dir.children(ruta_base).select { |f| f.end_with?('.txt') }.sort
-  salir = false
-
-  files.each do |file|
-    break if salir
-    file_path = File.join(ruta_base, file)
-    text = File.read(file_path)
-    palabras = text.scan(/\b\w+\b/)
-    indice = 0
-    tamano_bloque = 50
-
-    while indice < palabras.length
-      break if salir
-      bloque = palabras[indice...[indice + tamano_bloque, palabras.length].min].join(" ")
-      speech = ESpeak::Speech.new(bloque,
-        voice: "en",
-        speed: 175,
-        pitch: 35,
-        capital: 25,
-        amplitude: 110
-      )
-
-      loop do
-        speech.speak
-        puts "Presione 'c' para continuar, 's' para salir o 'r' para reproducir nuevamente"
-        input = gets.chomp
-        if input.downcase == 's'
-          salir = true
-          break
-        elsif input.downcase == 'r'
-          next
-        elsif input.downcase == 'c'
-          break
-        end
-      end
-      indice += tamano_bloque
-    end
-  end
-  exit if salir
+  ruta_base = "books/moshe-rabenu/bereshit"
+  reproducir_texto(ruta_base, "en")
 
 when "3"
-  ruta_base = "books/ganzfried/kitzur-shuljan-arusj/c1"
-  files = Dir.children(ruta_base).select { |f| f.end_with?('.txt') }.sort
-  salir = false
-
-  files.each do |file|
-    break if salir
-    file_path = File.join(ruta_base, file)
-    text = File.read(file_path)
-    speech = ESpeak::Speech.new(text,
-      voice: "es",
-      speed: 150,
-      pitch: 40
-    )
-
-    loop do
-      speech.speak
-      puts "Presione 'c' para continuar, 's' para salir o 'r' para reproducir nuevamente"
-      input = gets.chomp
-      if input.downcase == 's'
-        salir = true
-        break
-      elsif input.downcase == 'r'
-        next
-      elsif input.downcase == 'c'
-        break
-      end
-    end
-  end
-  exit if salir
+  ruta_base = "books/ganzfried/kitzur-shuljan-arusj"
+  reproducir_texto(ruta_base, "es")
 
 else
   puts "Selección inválida"

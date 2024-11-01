@@ -11,26 +11,10 @@ Al terminar, la idea es hacer un ejecutable .deb con ocra, ya que al hacerlo .de
 
 además, la idea es que se pueda cargar cualquier archivo del escritorio, no solo el que está por defecto en la app.
 
-Hay que agregar en pdf-reader y en speaker, volver al index en un input
-
-
-Sí, es posible descargar un PDF desde la terminal utilizando el comando wget o curl.
-Opción 1: wget
-Bash
-wget https://ejemplo.com/archivo.pdf
-Opción 2: curl
-Bash
-curl -O https://ejemplo.com/archivo.pdf
-
-
-Convenios de Nomenclatura
-feature/: Para características nuevas.
-fix/: Para correcciones de errores.
 
 Mejoras:
 
-que calcule el tiempo que dura cada libro leidoc on el speaker, y que se pueda calcular cuanto se demoraria en leer el libro si uno lee tanto tiempo por día.
+que calcule el tiempo que dura cada libro leido con el speaker, y que se pueda calcular cuanto se demoraria en leer el libro si uno lee tanto tiempo por día.
 
-además, agregar un listado de preceptos que se encuentren en el libroen el jardin de la paz.
-
-Está funcionando bien en el jardín de la paz, pero los demás libros no he revisado, ya que su estructura con los dir es diferente.
+además, agregar un listado de preceptos que se encuentren en el libro en el jardin de la paz.
+agregar "ir a la sección anterior" o "cambiar de libro"
