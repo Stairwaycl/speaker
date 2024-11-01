@@ -2,7 +2,7 @@ require 'espeak'
 
 # Menú para seleccionar el libro
 puts "Seleccione un libro para escuchar:"
-puts "1. En el jardín de la paz (Paz-hombres) - Rabino Shalom Arush"
+puts "1. En el jardín de la paz - Rabino Shalom Arush"
 puts "2. Sefer Bereshit - Moshe Rabenu"
 puts "3. Kitzur Shuljan Aruj - Rabino Shlomo Ganzfried"
 
