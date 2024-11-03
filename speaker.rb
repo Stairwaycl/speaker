@@ -1,14 +1,18 @@
 require 'espeak'
 
-# Menú para seleccionar el libro
-puts "Seleccione un libro para escuchar:"
-puts "1. En el jardín de la paz - Rabino Shalom Arush"
-puts "2. Sefer Bereshit - Moshe Rabenu"
-puts "3. Kitzur Shuljan Aruj - Rabino Shlomo Ganzfried"
+# Obtener los nombres de los directorios dentro de books
+books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }
+
+# Menú para selectionar el libro
+puts "--------------------------------"
+puts "Selectione un libro para escuchar:"
+books_dir.sort.each_with_index do |libro, index|
+  puts "#{index + 1}. #{libro.capitalize}"
+end
 
 # Obtener la selección del usuario
 print "Ingrese el número de su selección: "
-seleccion = gets.chomp
+selection = gets.chomp
 
 def reproducir_texto(ruta_base, voice)
   salir = false
@@ -49,17 +53,17 @@ def reproducir_texto(ruta_base, voice)
   exit if salir
 end
 
-case seleccion
+case selection
 when "1"
-  ruta_base = "books/arush/paz-hombres"
+  ruta_base = "books/en-el-jardin-de-la-paz-solo-para-hombres"
   reproducir_texto(ruta_base, "es")
 
 when "2"
-  ruta_base = "books/moshe-rabenu/bereshit"
+  ruta_base = "books/bereshit"
   reproducir_texto(ruta_base, "en")
 
 when "3"
-  ruta_base = "books/ganzfried/kitzur-shuljan-arusj"
+  ruta_base = "books/kitzur-shuljan-arusj"
   reproducir_texto(ruta_base, "es")
 
 else
