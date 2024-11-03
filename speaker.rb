@@ -1,31 +1,31 @@
 require 'espeak'
 
 # Obtener los nombres de los directorios dentro de books
-books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }
+books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }.sort
 
-# Menú para selectionar el libro
+# Menú para selectionar el book
 puts "--------------------------------"
 puts "Selectione un libro para escuchar:"
-books_dir.sort.each_with_index do |libro, index|
-  puts "#{index + 1}. #{libro.capitalize}"
+books_dir.each_with_index do |book, index|
+  puts "#{index + 1}. #{book.capitalize}"
 end
 
 # Obtener la selección del usuario
 print "Ingrese el número de su selección: "
-selection = gets.chomp
+selection = gets.chomp.to_i
 
-def reproducir_texto(ruta_base, voice)
-  salir = false
+def play_text(ruta_base, voice)
+  go_to_menu = false
   dirs = Dir.children(ruta_base).select { |d| d.start_with?('c') }.sort
 
   dirs.each do |dir|
-    break if salir
-    ruta_libro = File.join(ruta_base, dir)
-    files = Dir.children(ruta_libro).select { |f| f.end_with?('.txt') }.sort
+    break if go_to_menu
+    ruta_book = File.join(ruta_base, dir)
+    files = Dir.children(ruta_book).select { |f| f.end_with?('.txt') }.sort
 
     files.each do |file|
-      break if salir
-      file_path = File.join(ruta_libro, file)
+      break if go_to_menu
+      file_path = File.join(ruta_book, file)
       text = File.read(file_path)
       speech = ESpeak::Speech.new(text,
         voice: voice,
@@ -37,10 +37,14 @@ def reproducir_texto(ruta_base, voice)
 
       loop do
         speech.speak
-        puts "Presione 'c' para continuar, 's' para salir o 'r' para reproducir nuevamente"
+        puts "Ingrese"
+        puts "'c' para continuar"
+        puts "'s' para ir al menú principal"
+        puts "'r' para reproducir nuevamente"
+        print ">"
         input = gets.chomp
         if input.downcase == 's'
-          salir = true
+          go_to_menu = true
           break
         elsif input.downcase == 'r'
           next
@@ -50,22 +54,11 @@ def reproducir_texto(ruta_base, voice)
       end
     end
   end
-  exit if salir
+  exit if go_to_menu
 end
 
-case selection
-when "1"
-  ruta_base = "books/en-el-jardin-de-la-paz-solo-para-hombres"
-  reproducir_texto(ruta_base, "es")
+# Obtener el nombre del libro seleccionado
+libro_seleccionado = books_dir[selection - 1]
+ruta_base = "books/#{libro_seleccionado}"
 
-when "2"
-  ruta_base = "books/bereshit"
-  reproducir_texto(ruta_base, "en")
-
-when "3"
-  ruta_base = "books/kitzur-shuljan-arusj"
-  reproducir_texto(ruta_base, "es")
-
-else
-  puts "Selección inválida"
-end
+play_text(ruta_base, "es")
