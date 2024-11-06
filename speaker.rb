@@ -29,7 +29,7 @@ def play_text(ruta_base, voice)
       text = File.read(file_path)
       speech = ESpeak::Speech.new(text,
         voice: voice,
-        speed: 175,
+        speed: 185,
         pitch: 50,
         capital: 25,
         amplitude: 110
