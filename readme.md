@@ -16,3 +16,7 @@ Agregar un listado de preceptos que se encuentren en el libro en el jardin de la
 agregar "ir a la sección anterior" o "cambiar de libro"
 
 Queremos agregar gem "threads" para poder ejecutar acciones mientras se está reproduciendo el audio.
+
+agregar oidor de voz y conversion a .txt
+
+agregar al menu el elegir el capitulo a estudiar y la seccion
