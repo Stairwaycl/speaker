@@ -59,6 +59,7 @@ def play_text(ruta_base, ruta_chapter, sections, selected_section, voice, chapte
       capital: 25,
       amplitude: 110
     )
+    #speed real es 185
     speech.speak
     puts "--------------------------------"
     puts "Ingrese"
@@ -75,7 +76,15 @@ def play_text(ruta_base, ruta_chapter, sections, selected_section, voice, chapte
     elsif input.downcase == 'c'
       index += 1
       if index >= sections.length
-        seleccionar_capitulo(ruta_base, chapters)
+        # Pasar al siguiente capítulo
+        current_index = chapters.index(ruta_chapter)
+        if current_index < chapters.length - 1
+          ruta_chapter = chapters[current_index + 1]
+          sections = Dir.children(File.join(ruta_base, ruta_chapter)).select { |f| f.end_with?('.txt') }.sort
+          index = 0
+        else
+          seleccionar_capitulo(ruta_base, chapters)
+        end
       end
     end
   end
