@@ -1,7 +1,10 @@
-require 'espeak'
+require 'espeak' #gema para reproducir texto en voz
+require 'pry-byebug' #para buguear
 
-# Obtener los nombres de los directorios dentro de books
+# Obtener los nombres de los directorios dentro del directorio books y guardarlos en un array
 books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }.sort
+
+#binding.pry
 
 # Menú para seleccionar el libro
 puts "--------------------------------"
@@ -43,10 +46,12 @@ def seleccionar_capitulo(ruta_base, chapters)
 end
 
 def play_text(ruta_base, ruta_chapter, sections, selected_section, voice, chapters)
-  ruta_section = File.join(ruta_base, ruta_chapter, sections[selected_section - 1])
+  index = selected_section - 1
 
   loop do
-    text = File.read(ruta_section) # Vuelve a leer el archivo aquí
+    ruta_section = File.join(ruta_base, ruta_chapter, sections[index])
+
+    text = File.read(ruta_section)
     speech = ESpeak::Speech.new(text,
       voice: voice,
       speed: 185,
@@ -62,12 +67,16 @@ def play_text(ruta_base, ruta_chapter, sections, selected_section, voice, chapte
     puts "'r' para reproducir nuevamente"
     print ">"
     input = gets.chomp
+
     if input.downcase == 's'
       seleccionar_capitulo(ruta_base, chapters)
     elsif input.downcase == 'r'
       next
     elsif input.downcase == 'c'
-      break
+      index += 1
+      if index >= sections.length
+        seleccionar_capitulo(ruta_base, chapters)
+      end
     end
   end
 end

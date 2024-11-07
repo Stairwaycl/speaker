@@ -6,3 +6,4 @@ gem "espeak-ruby", require: "espeak" # es necesario sudo apt-get install espeak 
 
 gem 'pdf-reader', '~> 2.12'
 gem 'tty-prompt', '~> 0.23.1'
+gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
