@@ -2,13 +2,12 @@ require 'espeak' #gema para reproducir texto en voz
 require 'pry-byebug' #para buguear
 
 # Obtener los nombres de los directorios dentro del directorio books y guardarlos en un array
-books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }.sort
-
-#binding.pry
+books_dir = Dir.children('books').sort
 
 # Menú para seleccionar el libro
 puts "--------------------------------"
 puts "Seleccione un libro para escuchar:"
+
 books_dir.each_with_index do |book, index|
   puts "#{index + 1}. #{book.capitalize}"
 end
@@ -16,6 +15,8 @@ end
 # Obtener la selección del usuario
 print "Ingrese el número de su selección: "
 selection = gets.chomp.to_i
+
+binding.pry
 
 # Obtener el nombre del libro seleccionado
 selected_book = books_dir[selection - 1]
