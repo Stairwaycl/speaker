@@ -2,7 +2,7 @@ require 'espeak' #gema para reproducir texto en voz
 require 'pry-byebug' #para buguear
 
 # Obtener los nombres de los directorios dentro del directorio books y guardarlos en un array
-books_dir = Dir.children('books').select { |d| d != '.' && d != '..' }.sort
+books_dir = Dir.children('books')
 
 #binding.pry
 
