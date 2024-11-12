@@ -12,9 +12,9 @@ loop do
 
   case option
   when "1"
-    system("ruby speaker.rb")
+    system("ruby txt_to_speech.rb")
   when "2"
-    system("ruby pdf-reader.rb")
+    system("ruby pdf_to_txt.rb")
   when "3"
     puts "¡Adiós!"
     exit

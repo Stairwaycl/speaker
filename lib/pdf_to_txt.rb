@@ -27,15 +27,22 @@ end
 prompt = TTY::Prompt.new
 
 pdf_file = prompt.ask('Ingrese la ruta del archivo PDF:', default: './archivo.pdf')
-txt_file = prompt.ask('Ingrese el nombre del archivo TXT:', default: 'archivo.txt')
+book_title = prompt.ask('Ingrese el título del libro:')
 
 converter = PdfToTxt.new(pdf_file)
 
 if !File.exist?(pdf_file)
   puts "Error: El archivo #{pdf_file} no existe."
   exit
+else
+  # Crea el directorio para el libro si no existe
+  book_dir = "books/#{book_title}"
+  Dir.mkdir(book_dir) unless Dir.exist?(book_dir)
+
+  # Genera el nombre del archivo TXT. Por defecto es c01 porque los capitulos se separaran manualmente
+  txt_file = "#{book_dir}/c01.txt"
+
+  converter.save_to_file(txt_file)
+
+  puts "Conversión realizada con éxito. Archivo TXT generado: #{txt_file}"
 end
-
-converter.save_to_file(txt_file)
-
-puts "Conversión realizada con éxito. Archivo TXT generado: #{txt_file}"
