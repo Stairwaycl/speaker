@@ -55,10 +55,10 @@ def play_text(base_dir, ruta_chapter, sections, selected_section, voice, chapter
 
     text = File.read(ruta_section)
     speech = ESpeak::Speech.new(text,
-      voice: voice,
-      speed: 185,
+      voice: "es",
       pitch: 50,
-      capital: 25,
+      speed: 170,
+      capital: 20,
       amplitude: 110
     )
     #speed real es 185
